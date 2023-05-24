@@ -188,10 +188,6 @@ F
 
 
 
-"afara" |
-
-"Afara" return AFARA;
-
  
 
 "care au avut loc" return LOC;
@@ -204,6 +200,10 @@ F
 
 "e"    |
 
+"sunt" |
+
+"Sunt" |
+
 "este" return ESTE;
 
 
@@ -214,9 +214,11 @@ F
 
 "La revedere" |
 
+"la revedere" |
+
 "Pa" |
 
-"Servus" |
+"pa" |
 
 "Zi faina" |
 
@@ -278,6 +280,10 @@ F
 
 "cartea" |
 
+"cartile" |
+
+"Cartile" |
+
 "carti"  |
 
 "carte" return CARTE;
@@ -297,6 +303,8 @@ F
 "pentru" |
 
 "Pentru" |
+
+"vreo"   |
 
 "Cateva" return PREPOZITIE;
 
@@ -450,6 +458,14 @@ F
 
 "Invata" |
 
+"invat"
+
+"Cum pot sa invat" |
+
+"cum pot sa invat" |
+
+"mi-as dori sa invat" |
+
 "invata" {yylval.strvalue=yytext;  return INVATA;}
 
 
@@ -480,25 +496,49 @@ F
 
 "Anglia"   |
 
+"Angliei"  |
+
 "Austria"  |
+
+"Austriei" |
 
 "China"	   |
 
+"Chinei"   |
+
 "Franta"   |
+
+"Frantei"  |
 
 "Italia"   |
 
+"Italiei"  |
+
 "Peru"	   |
+
+"Perului" |
 
 "Romania"  |
 
+"Romaniei" |
+
 "Spania"   |
+
+"Spaniei"  |
 
 "Turcia"   |
 
+"Turciei"  |
+
 "Ungaria"  |
 
+"Ungariei" |
+
+"Greciei"  |
+
 "Grecia"   {yylval.strvalue=strdup(yytext);  return TARA;}
+
+
 
 
 
@@ -510,23 +550,45 @@ F
 
 "Londra"    |
 
-"Vienna"    |    
+"Londrei"   |
 
-"Beijing"   |    
+"Vienna"    |
+
+"Vienei"    |    
+
+"Beijing"   |
+
+"Beijingului" |    
 
 "Paris"     |
 
+"Parisului" |
+
 "Atena"     |
+
+"Atenei"    |
 
 "Roma"      |
 
+"Romei"     |
+
 "Lima"      |
+
+"Limei"     |
 
 "Bucuresti" |
 
+"Bucurestiuluui" |
+
 "Madrid"    |
 
+"Madridului" |
+
 "Ankara"    |
+
+"Ankarei"   |
+
+"Budapestei" |
 
 "Budapesta" {yylval.strvalue=strdup(yytext);  return CAPITALA;}
 
@@ -552,6 +614,24 @@ F
 
 
 
+"spune-mi capitala" |
+
+"spune capitala" |
+
+"scrie-mi capitala" |
+
+"scrie capitala"  |
+
+"furnizeaza-mi capitala" |
+
+"furnizeaza capitala" |
+
+"genereaza-mi capitala" |
+
+"genereaza capitala" |
+
+"zi-mi capitala " return ZI;
+
 
 
 
@@ -561,6 +641,8 @@ F
 [\t\n]	;
 
 .    ;
+
+
 
 
 

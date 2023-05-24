@@ -14,11 +14,9 @@
 
 
 
-void afisareMate(int i);
-
-void afisareBio(int i);
 
 
+void afisareTara(char* i);
 
 int searchCity(char* city);        
 
@@ -67,68 +65,6 @@ char despreAventura[4][200] = {
         };
 
       
-
-char despreCuriozitatiMate[8][600] = {
-
-	"Știați că dacă înmulțiți 111,111,111 cu 111,111,111, rezultatul devine egal cu 12,345,678,987,654,321.\n>",
-
-	"Există o legătură între pizza și matematica. Și anume: pentru a calcula volumul formei cilindrice a pizza-ei, vine în ajutor formula Pi x r2 x h.\n>",
-
-	"Zero este singurul număr care nu poate fi reprezentat în cifre romane. Motivul pentru care nu există nici o cifră pentru zero este că nu era nevoie de o cifră care să o reprezinte.\n>", 
-
-	"În loc de cifre romane, cuvântul latin „nulla” ar fi fost folosit pentru a reprezenta conceptul de zero.\n>",
-
-	"Cifra 6 este cel mai mic număr perfect. În teoria numerelor, un număr perfect este un întreg pozitiv care este egal cu suma divizorilor săi pozitivi.\n>"
-
-	"6 este cel mai mic număr perfect. Iată un exemplu, pentru a înțelege mai bine: 1+2+3=6.\n>",
-
-	"Se pare pitagoricienii, adeptii scolii filosofului grec Pitagora,, foloseau pietre mici pentru a reprezenta numerele.\n>",
-
-	"în 1671 Wilhelm Gottfried Leibnitz realizează prima mașină de calcul care poate realiza operații de împărțire și înmulțire.\n>"
-
-};
-
-
-
-
-
-char despreCuriozitatiBio[17][600] = {
-
-        "Dinţii unui liliac vampir sunt atât de ascuţiţi încât muşcătura sa nu poate fi resimţită deloc.\n>",
-
-        "Limba unui cameleon are cel puţin lungimea corpului lui, dar poate apuca prada într-o fracţiune de secundă.\n>",
-
-        "Ochii unui vultur au capacitatea de a vedea de cel puţin patru ori mai clar decât cei ai oamenilor.\n>",
-
-        "Bizonii adulţi sunt cele mai mari mamifere terestre din America de Nord.\n>",
-
-        "Pentru a zbura, păsările colibri îşi pot scutura aripile de aproximativ 200 de ori pe secundă.\n>",
-
-        "Pinguinii imperiali pot rămâne sub apă până la 27 de minute şi se pot scufunda la o adâncime de până la 500 de metri.\n>",
-
-        "Atunci când găsesc o sursă de apă, cămilele sălbatice bactriane (unele dintre cele mai rare mamifere de pe planetă) beau până la 50 de litri.\n>",
-
-        "Cea mai bună tensiune arterială, la adult, este 120/70 mmHg.\n>",
-
-        "Nu există cancer ca o singură entitate, ci peste 300 de tipuri de cancer, fiecare cu mecanisme proprii, celule diferite, răspunsuri distincte la terapii.\n>",
-
-        "Glanda este o denumire populară greșită a tiroidei; corpul are zeci de glande.\n>",
-
-        "Un om poate simți durere la nivelul unui membru superior sau inferior care nu mai există; se numește sindromul membrului fantomă.\n>",
-
-        "Creierul nu doare pentru că nu are nociceptori (receptori de durere). Se poate face așa numita brain awake surgery, fără anestezie generală.\n>",
-
-        "Cea mai bună frecvență cardiacă la care raportul performanță/consum de oxigen este ideal este de 55-65 bpm.\n>",
-
-        "Inima este primul organ funcțional și începe să pompeze sânge în a patra săptămână de viață intrauterină.\n>",
-
-        "Creierul consumă în regim bazal cam 25% din energia întregului organism.\n>",
-
-        "Unul dintre cele mai importante gesturi pe care le putem face pentru sănătate este spălatul pe mâini.\n>",
-
-        "Diabeticii pot face infarct miocardic acut fără durere, pentru că neuropatia diabetică le alterează transmiterea nervoasă.\n>"
-
-};
 
 
 
@@ -210,7 +146,7 @@ char *strvalue;
 
 %type<strvalue> geogra domeniu 
 
-%token  MULTUMESC ENDPROP DORESC CUNOSC VERIFIC DIN VIRGULA INTREBARE LOC IN_AN POATE ISTORIE SAL CASA ENCICLOPEDIE CE CUM  CHEAMA APR IN LUMINA TOATA CAMERA BUC BAIE STINGE VREAU SA VAD UN LA MA MERG AFARA DE CAINE MEU II ESTE FOAME SETE REVE NE MAI AUVE POTI AJUTA VREMEA VREMCAND PLOUA SENIN INNOR IMI SPUI CURIOZ STI DOMENIU DE MATE BIO CARTE VARSTA FICTIUNE POEZIE AVENTURA PREPOZITIE
+%token  MULTUMESC ENDPROP DORESC CUNOSC VERIFIC DIN VIRGULA INTREBARE LOC IN_AN POATE ISTORIE SAL ENCICLOPEDIE CE CUM  CHEAMA APR IN TOATA VREAU SA VAD UN LA MA  DE MEU II ESTE REVE NE MAI AUVE POTI AJUTA IMI SPUI ZI CURIOZ STI DOMENIU DE MATE BIO CARTE VARSTA FICTIUNE POEZIE AVENTURA PREPOZITIE
 
 
 
@@ -228,7 +164,7 @@ comenzi : salut_msg
 
         | actiuni_carti
 
-        | curiozitati
+        | feedback
 
         | istorie
 
@@ -239,6 +175,12 @@ comenzi : salut_msg
         |curiozitate_an_tara
 
         |multu
+
+        |quest_carti
+
+        |domeniu_carte
+
+ 
 
         ;
 
@@ -264,7 +206,7 @@ questions: TE NUMESTI {$$ = "[Enciclopedie]: Eu sunt chat-ul inteligent. Numele 
 
           |TE CHEAMA  {$$ = strdup("[Enciclopedie]: Eu sunt chat-ul inteligent. Numele meu este Enciclopedia!\n>");}
 
-          | MA POTI AJUTA  {$$ = strdup("[Enciclopedie]: Te pot ajuta cu diferite cumenzi. Detin informatii despre: Carti/Mate/Bio/Geografie/Istorie\nPoti sa pui interogari despre Capitale/Tari.\nQuery-uri despre Jocurile Olimpice din tarile si anii in care s-au desfasurat.");}
+          | MA POTI AJUTA  {$$ = strdup("[Enciclopedie]: Te pot ajuta cu diferite cumenzi.\n Detin informatii despre: Informatii despre carti si genturi literare\nPoti sa pui interogari despre Capitale/Tari.\nCuriozitati despre un eveniment istoric in functie de anul dorit\nQuery-uri despre Jocurile Olimpice din tarile si anii in care s-au desfasurat");}
 
           ;
 
@@ -278,7 +220,7 @@ geogra : actiune exersez_geo ENDPROP {printf("[Enciclopedie]: Da, introdu, te ro
 
        |CE domeniu verb ENDPROP {printf("%s",$2);}
 
-       |INVATA GEO ENDPROP {printf("[Enciclopedie]: Da, introdu, te rog, numele unei tari, pentru care se va genera capitala\n>");}
+       |INVATA GEO ENDPROP {printf("[Enciclopedie]:Introdu, te rog, numele tarii sau o intrebat cu numele unei tari, pentru care se va genera capitala\n>");}
 
        | TARA CAPITALA ENDPROP{
 
@@ -291,6 +233,8 @@ geogra : actiune exersez_geo ENDPROP {printf("[Enciclopedie]: Da, introdu, te ro
         strcpy(capi, "");
 
         strcat(capi, $2);
+
+        
 
         
 
@@ -348,7 +292,7 @@ geogra : actiune exersez_geo ENDPROP {printf("[Enciclopedie]: Da, introdu, te ro
 
        }
 
-       | TARA ENDPROP {
+       |TARA ENDPROP {
 
         strcpy(aux, "");
 
@@ -356,69 +300,37 @@ geogra : actiune exersez_geo ENDPROP {printf("[Enciclopedie]: Da, introdu, te ro
 
         $$=aux;
 
-       if(strcmp(aux, "Anglia")==0){
+        
 
-          printf("[capitala]: Londra\n", $1);
+        afisareTara(aux);
 
-       }else if(strcmp(aux, "Austria")==0){
-
-          printf("[capitala]: Vienna\n", $1);
-
-       } else if(strcmp(aux, "China")==0){
-
-          printf("[capitala]: Beijing\n", $1);
+       
 
        }
 
-       else if(strcmp(aux, "Franta")==0){
+       | questTara TARA ENDPROP {
 
-          printf("[capitala]: Paris\n", $1);
+        strcpy(aux, "");
 
-       }
+        strcat(aux, $2);
 
-       else if(strcmp(aux, "Grecia")==0){
+        $$=aux;
 
-          printf("[capitala]: Atena\n", $1);
+        
 
-       }
+        afisareTara(aux);
 
-       else if(strcmp(aux, "Italia")==0){
-
-          printf("[capitala]: Roma\n", $1);
-
-       } else if(strcmp(aux, "Peru")==0){
-
-          printf("[capitala]: Lima\n", $1);
-
-       }
-
-       else if(strcmp(aux, "Romania")==0){
-
-          printf("[capitala]: Bucuresti\n", $1);
-
-       }else if(strcmp(aux, "Spania")==0){
-
-          printf("[capitala]: Madrid\n", $1);
-
-       }
-
-       else if(strcmp(aux, "Turcia")==0){
-
-          printf("[capitala]: Ankara\n", $1);
-
-       }
-
-       else if(strcmp(aux, "Ungaria")==0){
-
-          printf("[capitala]: Budapesta\n", $1);
-
-       }
+       
 
        }
 
        ;
 
+questTara:  ZI
 
+          | ZI PREPOZITIE 
+
+	  ;
 
 exersez_geo: SA EXERSEAZA GEO
 
@@ -450,7 +362,7 @@ verb  : CUNOSC
 
 
 
-istorie:STI ISTORIE ENDPROP {printf("[Enciclopedie]: Da, introdu, te rog un an despre care doresti informatii.\n>");}
+istorie:STI ISTORIE ENDPROP {printf("[Enciclopedie]: Da, introdu, te rog un an despre care doresti informatii.(Ani cunoscuti: 1799, 1330, 1395, 1595, 1475, 1475)\n>");}
 
        |ISTORIE ENDPROP {printf("[Enciclopedie]: Da, introdu, te rog un an despre care doresti informatii.\n>");}
 
@@ -488,9 +400,37 @@ istorie:STI ISTORIE ENDPROP {printf("[Enciclopedie]: Da, introdu, te rog un an d
 
 }
 
-       ;            
+       ;   
 
-actiuni_carti: STI PREPOZITIE CARTE DE FICTIUNE ENDPROP {
+       
+
+
+
+quest_carti:     STI CARTE DE 
+
+	       | SPUI CARTE DE
+
+	       | CUNOSC CARTE DE
+
+               | STI PREPOZITIE CARTE DE 
+
+               | SPUI PREPOZITIE CARTE DE 
+
+               | CUNOSC PREPOZITIE CARTE DE 
+
+               ;
+
+                 
+
+ domeniu_carte:     FICTIUNE
+
+         |     POEZIE
+
+         |     AVENTURA
+
+         ;
+
+actiuni_carti: quest_carti  domeniu_carte ENDPROP {
 
                                                         t = time(NULL);
 
@@ -502,85 +442,17 @@ actiuni_carti: STI PREPOZITIE CARTE DE FICTIUNE ENDPROP {
 
                                                 }
 
-                                                
-
-             | STI CARTE DE FICTIUNE ENDPROP  {
-
-                                                        t = time(NULL);
-
-                                                        tm = *localtime(&t);
-
-                                                        ind = tm.tm_sec % 4;
-
-                                                        printf("[Enciclopedie]: %s",despreFictiune[ind]);
-
-                                                }   
+                                                ;
 
                                                 
 
-                                                
+                                           
 
-             |  STI PREPOZITIE CARTE DE POEZIE ENDPROP {
+                                                                                                                 
 
-                                                        t = time(NULL);
+                                                                                                                        
 
-                                                        tm = *localtime(&t);
-
-                                                        ind = tm.tm_sec % 4;
-
-                                                        printf("[Enciclopedie]: %s",desprePoezie[ind]);
-
-                                                }
-
-                                                
-
-             | STI CARTE DE POEZIE ENDPROP  {
-
-                                                        t = time(NULL);
-
-                                                        tm = *localtime(&t);
-
-                                                        ind = tm.tm_sec % 4;
-
-                                                        printf("[Enciclopedie]: %s", desprePoezie[ind]);
-
-                                                }   
-
-                                                
-
-             |  STI PREPOZITIE CARTE DE AVENTURA ENDPROP {
-
-                                                        t = time(NULL);
-
-                                                        tm = *localtime(&t);
-
-                                                        ind = tm.tm_sec %4;
-
-                                                        printf("[Enciclopedie]: %s",despreAventura[ind]);
-
-                                                }
-
-                                                
-
-             | STI CARTE DE AVENTURA ENDPROP  {
-
-                                                        t = time(NULL);
-
-                                                        tm = *localtime(&t);
-
-                                                        ind = tm.tm_sec % 4;
-
-                                                        printf("[Enciclopedie]: %s",despreAventura[ind]);
-
-                                                }   
-
-                                                                                  
-
-                                                                                                                   
-
-                                                                                                                             
-
-             | CUM ESTE CARTE DE FICTIUNE ENDPROP {
+ feedback: CUM ESTE CARTE DE FICTIUNE ENDPROP {
 
                                                         t = time(NULL);
 
@@ -651,100 +523,6 @@ actiuni_carti: STI PREPOZITIE CARTE DE FICTIUNE ENDPROP {
                                            }                             
 
              ;
-
-
-
-curiozitati : IMI SPUI CURIOZ ENDPROP {
-
-                printf("[Enciclopedie]: Da! dar va trebui sa specifici in intrebarea ta un domeniu pe care il cunosc\n De ex: MATEMATICA, BIO\n>");
-
-              
-
-            }
-
-           
-
-            
-
-            | STI CURIOZ ENDPROP{
-
-                printf("[Enciclopedie]: Da! dar va trebui sa specifici in intrebarea ta un domeniu pe care il cunosc\n De ex: MATEMATICA, BIO\n");
-
-            }
-
-            | MATE ENDPROP {
-
-                t = time(NULL);
-
-                tm = *localtime(&t);
-
-                ind = tm.tm_sec % 7;
-
-                afisareMate(ind);
-
-            }
-
-             |IMI SPUI CURIOZ DE MATE ENDPROP {
-
-             
-
-                t = time(NULL);
-
-                tm = *localtime(&t);
-
-                ind = tm.tm_sec % 7;
-
-                afisareMate(ind);   
-
-            }
-
-             | STI CURIOZ DE MATE ENDPROP{
-
-                t = time(NULL);
-
-                tm = *localtime(&t);
-
-                ind = tm.tm_sec % 7;
-
-                afisareMate(ind);   
-
-            }
-
-	   |IMI SPUI CURIOZ DE BIO ENDPROP {
-
-              t = time(NULL);
-
-                tm = *localtime(&t);
-
-                ind = tm.tm_sec % 7;
-
-                afisareBio(ind);   
-
-            }
-
-             | STI CURIOZ DE BIO ENDPROP{
-
-                t = time(NULL);
-
-                tm = *localtime(&t);
-
-                ind = tm.tm_sec % 7;
-
-                afisareBio(ind);   
-
-            }
-
-            | BIO ENDPROP {
-
-                t = time(NULL);
-
-                tm = *localtime(&t);
-
-                ind = tm.tm_sec % 7;
-
-                afisareBio(ind);   
-
-            }
 
 
 
@@ -966,21 +744,17 @@ int main(){
 
         printf("------------------------------------------\n\n");
 
-        printf("        Enciclopedia-chatul tau interactiv!        \n\n");
+        printf("        Enciclopedia-chatul tau interactiv!        \n");
 
-        printf("- Mate.Stii curiozitati despre mate? Imi spui curiozitati despre mate? Mate\n");
+        printf("- \nIstorie: Stiu informatii despre evenimente istorice\n");
 
-        printf("- Bio. Stii curiozitati despre bio? Imi spui curiozitati despre bio? Bio\n");
+        printf("\nJocurile Olimpice: Pot sa furnizez informatii despre Anul/Tara care a participat ja Jocurile Olimice\n");
 
-        printf("- Istorie. Stii istorie .(Se vor introduce anii pentru care se vor furniza rezultate)\n");
+        printf("\nGeografie. Invata geografie. Exerseaza geografie  .(Se vor introduce intrebari cu  tara : pt a invata capitala. \nSe introduc Tara+Capitala, pt a valida corectitudinea\n");
 
-        printf("- Geografie. Invata geografie. Exerseaza geografie  .(Se vor introduce tara : pt a invata capitala. Se introduc Tara+Capitala, pt a valida corectitudinea\n");
+        printf("\nCarti: Generare de titluri pentru genurile literare: Fictiune/Poezie/Aventura\n");
 
-        printf("- Carti: Generare de titluri pentru genurile: Fictiune/Poezie/Aventura\n");
-
-        printf("- Carti: Sugestii pentru gen: Fictiune/Poezie/Aventura\n");     
-
-        printf("  Query-uri: (1) AN TARA\n");  
+        printf("\nCarti: Sugestii pentru gen: Fictiune/Poezie/Aventura\n");     
 
         printf("-------------------------------------------\n\n> ");
 
@@ -1000,29 +774,7 @@ int yyerror() {printf("Instructiune neacceptata! Va rugam sa verificati ortograf
 
 
 
-void afisareMate(int ind){
 
-                printf("[Enciclopedie]: Da! Uite una:\n");
-
-                ind = tm.tm_sec % 7;
-
-                printf("[Mate]: %s\n>",despreCuriozitatiMate[ind]);
-
-        }
-
-        
-
-        
-
-void afisareBio(int ind){
-
-        printf("[Enciclopedie]: Da! Uite una:\n");
-
-                printf("[BIO]: %s\n>",despreCuriozitatiBio[ind]);
-
-        }  
-
-        
 
         
 
@@ -1091,6 +843,72 @@ int searchCity(char* city) {
     }
 
     return -1;
+
+}
+
+
+
+
+
+void afisareTara(char* aux){
+
+if(strcmp(aux, "Anglia")==0 || strcmp(aux, "Angliei")==0  ){
+
+          printf("[capitala]: Londra\n");
+
+       }else if(strcmp(aux, "Austria")==0 ||  strcmp(aux, "Austriei")==0 ){
+
+          printf("[capitala]: Vienna\n");
+
+       } else if(strcmp(aux, "China")==0  || strcmp(aux, "Chinei")==0 ){
+
+          printf("[capitala]: Beijing\n");
+
+       }
+
+       else if(strcmp(aux, "Franta")==0 || strcmp(aux, "Frantei")==0 ){
+
+          printf("[capitala]: Paris\n");
+
+       }
+
+       else if(strcmp(aux, "Grecia")==0  || strcmp(aux, "Greciei")==0   ){
+
+          printf("[capitala]: Atena\n");
+
+       }
+
+       else if(strcmp(aux, "Italia")==0  || strcmp(aux, "Italiei")==0 ){
+
+          printf("[capitala]: Roma\n");
+
+       } else if(strcmp(aux, "Peru")==0  || strcmp(aux, "Perului")==0 ){
+
+          printf("[capitala]: Lima\n");
+
+       }
+
+       else if(strcmp(aux, "Romania")==0  || strcmp(aux, "Romaniei")==0 ){
+
+          printf("[capitala]: Bucuresti\n");
+
+       }else if(strcmp(aux, "Spania")==0 || strcmp(aux, "Spaniei")==0 ){
+
+          printf("[capitala]: Madrid\n");
+
+       }
+
+       else if(strcmp(aux, "Turcia")==0 || strcmp(aux, "Turciei")==0 ){
+
+          printf("[capitala]: Ankara\n");
+
+       }
+
+       else if(strcmp(aux, "Ungaria")==0 || strcmp(aux, "Ungariei")==0 ){
+
+          printf("[capitala]: Budapesta\n");
+
+       }
 
 }
 
